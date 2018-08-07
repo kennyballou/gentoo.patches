@@ -1,0 +1,8 @@
+* Gentoo User Patches
+
+This is a set of user patches either originally authored or collected from
+various different contributors.
+
+All patches are released as free and open source, unless explicitly noted
+otherwise, under the terms and conditions of the GNU General Public License,
+version 3 or later.
