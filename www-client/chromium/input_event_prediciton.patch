@@ -1,0 +1,15 @@
+description: https://657472.bugs.gentoo.org/attachment.cgi?id=535038
+author: Marcus Comstedt <marcus@mc.pp.se>
+
+--- chromium-68.0.3438.3/content/renderer/input/input_event_prediction.cc.orig	2018-06-06 09:07:59.226082299 +0200
++++ chromium-68.0.3438.3/content/renderer/input/input_event_prediction.cc	2018-06-06 09:09:40.725750812 +0200
+@@ -119,7 +119,8 @@
+     if (predictor != pointer_id_predictor_map_.end()) {
+       predictor->second->Update(data);
+     } else {
+-      pointer_id_predictor_map_.insert({event.id, SetUpPredictor()});
++      auto pair = std::make_pair(event.id, SetUpPredictor());
++      pointer_id_predictor_map_.insert(std::move(pair));
+       pointer_id_predictor_map_[event.id]->Update(data);
+     }
+   }

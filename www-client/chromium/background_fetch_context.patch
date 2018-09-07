@@ -1,0 +1,14 @@
+description: https://657472.bugs.gentoo.org/attachment.cgi?id=535038
+author: Marcus Comstedt <marcus@mc.pp.se>
+
+--- chromium-68.0.3438.3/content/browser/background_fetch/background_fetch_context.cc.orig	2018-06-05 22:27:27.977301187 +0200
++++ chromium-68.0.3438.3/content/browser/background_fetch/background_fetch_context.cc	2018-06-05 23:00:11.661703304 +0200
+@@ -218,7 +218,8 @@
+ 
+   scheduler_->AddJobController(controller.get());
+ 
+-  job_controllers_.insert({unique_id, std::move(controller)});
++  auto pair = std::make_pair(unique_id, std::move(controller));
++  job_controllers_.insert(std::move(pair));
+   std::move(done_closure).Run();
+ }
